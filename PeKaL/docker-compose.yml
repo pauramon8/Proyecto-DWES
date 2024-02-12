@@ -1,0 +1,46 @@
+version: '3'
+services:
+  redis:
+    image: "redis:7.0.8"
+    ports:
+      - "6379:6379"
+  mysql:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./mysql/provision/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: francisco_mesas_DAW/BIO
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongodb:/data/db
+  nodeapp:
+    build: 
+      context: ./node
+      args:
+        NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./node/src:/app
+    depends_on:
+      - redis
+      - mongodb
+      - mysql
+    command: [ "npm", "run", "start-dev" ]
+  phpMyAdmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: fmesascPass1234/
+    depends_on:
+      - mysql
