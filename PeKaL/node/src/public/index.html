@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PekaL</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Haz un registro de usuario -->
+
+    <form id="userForm">
+        <h1>Registro de sesion </h1>
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="contraseña" placeholder="Contraseña">
+        <input type="number" name="isAdmin" placeholder="Is Admin?">
+        <button type="button" onclick="enviarFormulario()">Enviar</button>
+        <p>¿Ya tienes una cuenta? <a href="#" onclick="mostrarFormularioLogin()">Iniciar sesión</a></p>
+    </form>
+
+    <form id="loginForm" style="display: none;">
+        <h1>Iniciar sesion </h1>
+        <input type="email" name="loginEmail" placeholder="Email">
+        <input type="password" name="loginContraseña" placeholder="Contraseña">
+        <button type="button" onclick="enviarLoginForm()">Iniciar sesión</button>
+        <p>¿No tienes una cuenta? <a href="#" onclick="mostrarFormularioRegistro()">Registrarse</a></p>
+    </form>
+
+    <script src="login.js"></script>
+    
+</body>
+</html>
